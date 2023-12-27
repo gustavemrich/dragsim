@@ -1,0 +1,8 @@
+name: dragsim
+version: '${project.version}'
+main: com.github.dragsim.Dragsim
+api-version: 1.20
+
+commands:
+  stats:
+  giveitem:
