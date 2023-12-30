@@ -6,26 +6,29 @@ import com.github.dragsim.player.statistics.*;
 import java.util.HashMap;
 
 public class DPlayer {
-    private HashMap<StatType, Stat> statistics;
+    private HashMap<DPlayerStatType, DPlayerStat> statistics;
+
     public DPlayer(Dragsim plugin, String uuid){
         statistics = new HashMap<>();
         loadStatistics(plugin);
 
     }
     private void loadStatistics(Dragsim plugin){
-        statistics.put(StatType.CRIT_CHANCE, new CritChance(plugin));
-        statistics.put(StatType.CRIT_DAMAGE, new CritDamage(plugin));
-        statistics.put(StatType.DEFENSE, new Defense(plugin));
-        statistics.put(StatType.HEALTH, new Health(plugin));
-        statistics.put(StatType.MAGIC_FIND, new MagicFind(plugin));
-        statistics.put(StatType.MANA, new Mana(plugin));
-        statistics.put(StatType.SPEED, new Speed(plugin));
-        statistics.put(StatType.STRENGTH, new Strength(plugin));
-        statistics.put(StatType.REGEN_HEALTH, new RegenHealth(plugin));
-        statistics.put(StatType.REGEN_MANA, new RegenMana(plugin));
+        statistics.put(DPlayerStatType.CRIT_CHANCE, new CritChance(plugin));
+        statistics.put(DPlayerStatType.CRIT_DAMAGE, new CritDamage(plugin));
+        statistics.put(DPlayerStatType.DEFENSE, new Defense(plugin));
+        statistics.put(DPlayerStatType.HEALTH, new Health(plugin));
+        statistics.put(DPlayerStatType.MAGIC_FIND, new MagicFind(plugin));
+        statistics.put(DPlayerStatType.MANA, new Mana(plugin));
+        statistics.put(DPlayerStatType.SPEED, new Speed(plugin));
+        statistics.put(DPlayerStatType.STRENGTH, new Strength(plugin));
+        statistics.put(DPlayerStatType.REGEN_HEALTH, new RegenHealth(plugin));
+        statistics.put(DPlayerStatType.REGEN_MANA, new RegenMana(plugin));
     }
 
-    public HashMap<StatType, Stat> getStatistics(){
+    public HashMap<DPlayerStatType, DPlayerStat> getStatistics(){
         return statistics;
     }
+
+
 }

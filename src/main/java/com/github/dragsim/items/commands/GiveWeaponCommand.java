@@ -1,7 +1,7 @@
-package com.github.dragsim.items.custom.commands;
+package com.github.dragsim.items.commands;
 
 import com.github.dragsim.Dragsim;
-import com.github.dragsim.items.custom.WeaponType;
+import com.github.dragsim.items.weapon.WeaponType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -33,6 +33,9 @@ public class GiveWeaponCommand implements TabExecutor {
                         break;
                     case "aspect_of_the_void":
                         player.getInventory().addItem(plugin.getCustomWeaponManager().getWeapons().get(WeaponType.ASPECT_OF_THE_VOID).getItem());
+                        break;
+                    case "frozen_scythe":
+                        player.getInventory().addItem(plugin.getCustomWeaponManager().getWeapons().get(WeaponType.FROZEN_SCYTHE).getItem());
                     default:
                         player.sendMessage("Weapon doesnt exist x(");
                         break;
@@ -50,6 +53,8 @@ public class GiveWeaponCommand implements TabExecutor {
         List<String> completions = new ArrayList<>();
         completions.add("Leaping_Sword");
         completions.add("Aspect_Of_The_End");
+        completions.add("Aspect_of_the_End");
+        completions.add("Frozen_Scythe");
         return completions;
     }
 }

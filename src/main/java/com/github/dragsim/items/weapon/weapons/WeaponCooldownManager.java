@@ -1,4 +1,4 @@
-package com.github.dragsim.items.custom.weapons;
+package com.github.dragsim.items.weapon.weapons;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

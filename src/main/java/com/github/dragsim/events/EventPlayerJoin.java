@@ -2,6 +2,7 @@ package com.github.dragsim.events;
 
 import com.github.dragsim.Dragsim;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -19,7 +20,11 @@ public class EventPlayerJoin implements Listener {
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        plugin.getDPlayerManager().loadPlayer(event.getPlayer().getUniqueId().toString());
+        Player player = event.getPlayer();
+        String uuid = player.getUniqueId().toString();
+
+        plugin.getDPlayerManager().loadPlayer(player);
+        player.setAllowFlight(true);
         /*
         // Get player UUID
         UUID uuid = event.getPlayer().getUniqueId();

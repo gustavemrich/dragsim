@@ -4,12 +4,18 @@ package com.github.dragsim.items;
 import com.github.dragsim.Dragsim;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 public abstract class CustomItem implements ItemEvents {
 
     public Dragsim plugin;
 
-    public CustomItem(Dragsim plugin){
+    public ItemStat stats;
+
+    public CustomItem(Dragsim plugin, LinkedHashMap<ItemStatType, Integer> baseStat){
         this.plugin = plugin;
+        this.stats = new ItemStat(baseStat);
 
     }
     @Override
@@ -33,6 +39,10 @@ public abstract class CustomItem implements ItemEvents {
     @Override
     public void onRightClick(Player player) {
         return;
+
+    }
+    @Override
+    public void onDoubleJump(Player player){
 
     }
 }

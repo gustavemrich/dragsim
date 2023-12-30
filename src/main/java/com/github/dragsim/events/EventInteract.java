@@ -1,16 +1,14 @@
 package com.github.dragsim.events;
 
 import com.github.dragsim.Dragsim;
-import com.github.dragsim.items.custom.CustomWeapon;
-import com.github.dragsim.items.custom.WeaponType;
-import org.bukkit.Bukkit;
+import com.github.dragsim.items.weapon.CustomWeapon;
+import com.github.dragsim.items.weapon.WeaponType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Map;

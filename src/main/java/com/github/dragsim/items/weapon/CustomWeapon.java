@@ -1,9 +1,11 @@
-package com.github.dragsim.items.custom;
+package com.github.dragsim.items.weapon;
 
 import com.github.dragsim.Dragsim;
 import com.github.dragsim.items.CustomItem;
-import com.github.dragsim.items.custom.weapons.WeaponCooldownManager;
-import com.github.dragsim.player.StatType;
+import com.github.dragsim.items.ItemStat;
+import com.github.dragsim.items.ItemStatType;
+import com.github.dragsim.items.weapon.weapons.WeaponCooldownManager;
+import com.github.dragsim.player.DPlayerStatType;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -11,18 +13,18 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public abstract class CustomWeapon extends CustomItem {
 
-    private int damage;
     private ItemStack item;
-    private HashMap<StatType, Integer> buffs;
+
     public WeaponCooldownManager cooldownManager;
 
-    public CustomWeapon(Dragsim plugin, long cooldownDuration){
-        super(plugin);
+    public CustomWeapon(Dragsim plugin, long cooldownDuration, LinkedHashMap<ItemStatType, Integer> base){
+        super(plugin, base);
         cooldownManager = new WeaponCooldownManager(cooldownDuration);
 
     }
@@ -33,7 +35,7 @@ public abstract class CustomWeapon extends CustomItem {
     }
 
 
-    public void createWeapon(Material material,String name, List<String> lore, HashMap<String, Integer> stats) {
+    public void createWeapon(Material material,String name, List<String> lore, LinkedHashMap<ItemStatType, Integer> stats) {
         item = new ItemStack(material);
 
         ItemMeta itemMeta = item.getItemMeta();
@@ -46,9 +48,9 @@ public abstract class CustomWeapon extends CustomItem {
 
 
 
-        for (Map.Entry<String, Integer> e:stats.entrySet()) {
+        for (Map.Entry<ItemStatType, Integer> e:stats.entrySet()) {
 
-            itemMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, e.getKey()), PersistentDataType.INTEGER, e.getValue());
+            itemMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, e.getKey().getValue()), PersistentDataType.INTEGER, e.getValue());
         }
         itemMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "iscustom"), PersistentDataType.BOOLEAN, true);
 
@@ -58,5 +60,8 @@ public abstract class CustomWeapon extends CustomItem {
 
     public ItemStack getItem(){
         return item;
+    }
+    public ItemStat getStat(){
+        return super.stats;
     }
 }

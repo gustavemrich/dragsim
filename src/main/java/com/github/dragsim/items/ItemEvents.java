@@ -8,4 +8,5 @@ public interface ItemEvents {
     public void onUnEquip(Player player);
     public void onLeftClick(Player player);
     public void onRightClick(Player player);
+    public void onDoubleJump(Player player);
 }

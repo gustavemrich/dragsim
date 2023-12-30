@@ -1,10 +1,13 @@
 package com.github.dragsim;
 
 import com.github.dragsim.actionbar.ActionBar;
+import com.github.dragsim.events.EventDoubleJump;
 import com.github.dragsim.events.EventInteract;
 import com.github.dragsim.events.EventPlayerJoin;
-import com.github.dragsim.items.custom.CustomWeaponManager;
-import com.github.dragsim.items.custom.commands.GiveWeaponCommand;
+import com.github.dragsim.items.armor.CustomArmorManager;
+import com.github.dragsim.items.commands.GiveArmorCommand;
+import com.github.dragsim.items.weapon.CustomWeaponManager;
+import com.github.dragsim.items.commands.GiveWeaponCommand;
 import com.github.dragsim.player.DPlayerManager;
 import com.github.dragsim.player.PlaceHolderAPI.*;
 import com.github.dragsim.player.Regen;
@@ -22,6 +25,8 @@ public final class Dragsim extends JavaPlugin {
 
     private Regen regen;
 
+    private CustomArmorManager customArmorManager;
+
     @Override
     public void onEnable() {
         this.fileManager = new FileManager(this);
@@ -30,12 +35,14 @@ public final class Dragsim extends JavaPlugin {
         this.customWeaponManager = new CustomWeaponManager(this);
         this.actionBar = new ActionBar(this);
         this.regen = new Regen(this);
+        this.customArmorManager = new CustomArmorManager(this);
 
         registerEvents();
 
 
         getCommand("stats").setExecutor(new statCommand());
-        getCommand("giveitem").setExecutor(new GiveWeaponCommand(this));
+        getCommand("giveweapon").setExecutor(new GiveWeaponCommand(this));
+        getCommand("givearmor").setExecutor(new GiveArmorCommand(this));
 
 
         new StatPlaceHolder(this).register();
@@ -48,6 +55,7 @@ public final class Dragsim extends JavaPlugin {
     private void registerEvents(){
         getServer().getPluginManager().registerEvents(new EventPlayerJoin(this), this);
         getServer().getPluginManager().registerEvents(new EventInteract(this), this);
+        getServer().getPluginManager().registerEvents(new EventDoubleJump(this), this);
     }
 
     public DPlayerManager getDPlayerManager(){
@@ -55,4 +63,6 @@ public final class Dragsim extends JavaPlugin {
     }
 
     public CustomWeaponManager getCustomWeaponManager(){return customWeaponManager;}
+
+    public CustomArmorManager getCustomArmorManager(){return customArmorManager;}
 }

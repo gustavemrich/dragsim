@@ -1,15 +1,18 @@
 package com.github.dragsim.player;
-public class Stat{
+public class DPlayerStat {
     private int value;
     private String name;
     private String color;
     private String symbol;
+    private int baseValue;
 
-    public Stat(int value, String name, String color, String symbol){
-        this.value = value;
+    public DPlayerStat(int baseValue, String name, String color, String symbol){
+        this.value = 0;
         this.name = name;
         this.color = color;
         this.symbol = symbol;
+        this.baseValue = baseValue;
+
 
     }
 
@@ -27,5 +30,9 @@ public class Stat{
     }
     public int getValue(){
         return value;
+    }
+
+    public int getBaseValue() {
+        return baseValue;
     }
 }
