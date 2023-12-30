@@ -1,14 +1,13 @@
 package com.github.dragsim.items.armor;
 
 import com.github.dragsim.Dragsim;
-import com.github.dragsim.items.armor.armors.Tarantula;
 
 import java.util.HashMap;
 
 public class CustomArmorManager {
 
     private Dragsim plugin;
-    private HashMap<ArmorType, CustomArmor> armors = new HashMap<>();
+    private HashMap<ArmorType, CustomArmorSet> armors = new HashMap<>();
 
 
     public CustomArmorManager(Dragsim plugin){
@@ -18,9 +17,9 @@ public class CustomArmorManager {
     }
 
     private void loadArmor(){
-        armors.put(ArmorType.TARANTULA, new Tarantula(plugin, 1));
+        armors.put(ArmorType.TARANTULA, new Tarantula());
     }
-    public HashMap<ArmorType, CustomArmor> getArmor(){
+    public HashMap<ArmorType, CustomArmorSet> getArmor(){
         return armors;
     }
 }

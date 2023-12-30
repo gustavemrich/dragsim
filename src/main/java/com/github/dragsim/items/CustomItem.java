@@ -41,8 +41,4 @@ public abstract class CustomItem implements ItemEvents {
         return;
 
     }
-    @Override
-    public void onDoubleJump(Player player){
-
-    }
 }

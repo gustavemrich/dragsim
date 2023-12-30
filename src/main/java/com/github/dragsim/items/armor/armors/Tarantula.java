@@ -1,52 +1,61 @@
 package com.github.dragsim.items.armor.armors;
 
 import com.github.dragsim.Dragsim;
-import com.github.dragsim.items.armor.CustomArmor;
-import com.github.dragsim.player.DPlayerStatType;
+import com.github.dragsim.items.ItemStatType;
+import com.github.dragsim.items.armor.CustomArmorPiece;
+import com.github.dragsim.items.armor.CustomArmorSet;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Tarantula extends CustomArmor{
+public class Tarantula extends CustomArmorSet {
 
     private int manaCost;
+    private int id;
     public Tarantula(Dragsim plugin, int id) {
-        super(plugin, id);
+        super(plugin, id,
+                new LinkedHashMap<>(){{
+                    put(ItemStatType.MANA, 100);
+                    put(ItemStatType.HEALTH, 100);
+                    put(ItemStatType.DEFENSE, 80);
+                }},
+                new LinkedHashMap<>(){{
+                    put(ItemStatType.MANA, 100);
+                    put(ItemStatType.HEALTH, 120);
+                    put(ItemStatType.DEFENSE, 100);
+                }},
+                new LinkedHashMap<>(){{
+                    put(ItemStatType.HEALTH, 60);
+                    put(ItemStatType.DEFENSE, 20);
+                }},
+                new LinkedHashMap<>(){{
+                    put(ItemStatType.MANA, 50);
+                    put(ItemStatType.HEALTH, 70);
+                    put(ItemStatType.DEFENSE, 100);
+                    put(ItemStatType.SPEED, 5);
+                }}
+        );
         manaCost = 40;
-        createArmor();
     }
 
-    private void createArmor(){
-        createHelmet();
-        createChestplate();
-        createLeggings();
-        createBoots();
+    @Override
+    public void createHelmet(Dragsim plugin){
+        helmet.piece = new ItemStack(Material.LEATHER_HELMET);
 
-    }
-
-    private void createHelmet(){
-        helmet = new ItemStack(Material.LEATHER_HELMET);
-
-        ItemMeta itemMeta = helmet.getItemMeta();
+        ItemMeta itemMeta = helmet.piece.getItemMeta();
 
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
         leatherArmorMeta.setColor(Color.BLACK);
-        helmet.setItemMeta(leatherArmorMeta);
+        helmet.piece.setItemMeta(leatherArmorMeta);
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = helmet.stats.getBaseStats(ChatColor.GREEN);
 
-        lore.add(ChatColor.GRAY + "Mana: " + ChatColor.GREEN + "+100");
-        lore.add(ChatColor.GRAY + "Health: " + ChatColor.GREEN + "+100 ❤");
-        lore.add(ChatColor.GRAY + "Defence: " + ChatColor.GREEN + "+80 ❈");
         lore.add("");
         lore.add(ChatColor.GOLD + "Full Set Bonus: Octodexterity");
         lore.add(ChatColor.GRAY + "Every 4th strike, deal " + ChatColor.RED + "double");
@@ -64,27 +73,21 @@ public class Tarantula extends CustomArmor{
         lore.add("");
         lore.add("" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "EPIC HELMET");
 
-        HashMap<String, Integer> stats = new HashMap<>();
-        stats.put("mana", 100);
-        stats.put("health", 100);
-        stats.put("defence", 80);
-
-        createPiece(helmet, ChatColor.DARK_PURPLE + "Tarantula Helmet",lore, stats);
+        CustomArmorPiece.createPiece(id,plugin,helmet.piece,ChatColor.DARK_PURPLE + "Tarantula Helmet",lore, helmet.stats.getBase());
     }
-    private void createChestplate(){
-        chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
 
-        ItemMeta itemMeta = chestplate.getItemMeta();
+    @Override
+    public void createChestplate(Dragsim plugin){
+        chestplate.piece = new ItemStack(Material.LEATHER_CHESTPLATE);
+
+        ItemMeta itemMeta = chestplate.piece.getItemMeta();
 
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
         leatherArmorMeta.setColor(Color.BLACK);
-        chestplate.setItemMeta(leatherArmorMeta);
+        chestplate.piece.setItemMeta(leatherArmorMeta);
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = chestplate.stats.getBaseStats(ChatColor.GREEN);
 
-        lore.add(ChatColor.GRAY + "Mana: " + ChatColor.GREEN + "+100");
-        lore.add(ChatColor.GRAY + "Health: " + ChatColor.GREEN + "+120 ❤");
-        lore.add(ChatColor.GRAY + "Defence: " + ChatColor.GREEN + "+100 ❈");
         lore.add("");
         lore.add(ChatColor.GOLD + "Full Set Bonus: Octodexterity");
         lore.add(ChatColor.GRAY + "Every 4th strike, deal " + ChatColor.RED + "double");
@@ -102,27 +105,22 @@ public class Tarantula extends CustomArmor{
         lore.add("");
         lore.add("" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "EPIC CHESTPLATE");
 
-        HashMap<String, Integer> stats = new HashMap<>();
-        stats.put("mana", 100);
-        stats.put("health", 120);
-        stats.put("defence", 100);
 
-        createPiece(chestplate, ChatColor.DARK_PURPLE + "Tarantula Chestplate",lore, stats);
+        CustomArmorPiece.createPiece(id,plugin,chestplate.piece,ChatColor.DARK_PURPLE + "Tarantula Chestplate",lore, chestplate.stats.getBase());
     }
 
-    private void createLeggings(){
-        leggings = new ItemStack(Material.LEATHER_LEGGINGS);
+    @Override
+    public void createLeggings(Dragsim plugin){
+        leggings.piece = new ItemStack(Material.LEATHER_LEGGINGS);
 
-        ItemMeta itemMeta = leggings.getItemMeta();
+        ItemMeta itemMeta = leggings.piece.getItemMeta();
 
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
         leatherArmorMeta.setColor(Color.BLACK);
-        leggings.setItemMeta(leatherArmorMeta);
+        leggings.piece.setItemMeta(leatherArmorMeta);
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = leggings.stats.getBaseStats(ChatColor.GREEN);
 
-        lore.add(ChatColor.GRAY + "Health: " + ChatColor.GREEN + "+60 ❤");
-        lore.add(ChatColor.GRAY + "Defence: " + ChatColor.GREEN + "+20 ❈");
         lore.add("");
         lore.add(ChatColor.GOLD + "Full Set Bonus: Octodexterity");
         lore.add(ChatColor.GRAY + "Every 4th strike, deal " + ChatColor.RED + "double");
@@ -140,30 +138,23 @@ public class Tarantula extends CustomArmor{
         lore.add("");
         lore.add("" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "EPIC LEGGINGS");
 
-        HashMap<String, Integer> stats = new HashMap<>();
-        stats.put("health", 60);
-        stats.put("defence", 20);
-
-        createPiece(leggings, ChatColor.DARK_PURPLE + "Tarantula Leggings",lore, stats);
+        CustomArmorPiece.createPiece(id, plugin,leggings.piece, ChatColor.DARK_PURPLE + "Tarantula Leggings",lore, leggings.stats.getBase());
 
         //createPiece();
     }
 
-    private void createBoots(){
-        boots = new ItemStack(Material.LEATHER_BOOTS);
+    @Override
+    public void createBoots(Dragsim plugin){
+        boots.piece = new ItemStack(Material.LEATHER_BOOTS);
 
-        ItemMeta itemMeta = boots.getItemMeta();
+        ItemMeta itemMeta = boots.piece.getItemMeta();
 
         LeatherArmorMeta leatherArmorMeta = (LeatherArmorMeta) itemMeta;
         leatherArmorMeta.setColor(Color.BLACK);
-        boots.setItemMeta(leatherArmorMeta);
+        boots.piece.setItemMeta(leatherArmorMeta);
 
-        List<String> lore = new ArrayList<>();
+        List<String> lore = boots.stats.getBaseStats(ChatColor.GREEN);
 
-        lore.add(ChatColor.GRAY + "Mana: " + ChatColor.GREEN + "+50");
-        lore.add(ChatColor.GRAY + "Health: " + ChatColor.GREEN + "+70 ❤");
-        lore.add(ChatColor.GRAY + "Defence: " + ChatColor.GREEN + "+100 ❈");
-        lore.add(ChatColor.GRAY + "Speed: " + ChatColor.GREEN + "+5");
         lore.add("");
         lore.add(ChatColor.GOLD + "Full Set Bonus: Octodexterity");
         lore.add(ChatColor.GRAY + "Every 4th strike, deal " + ChatColor.RED + "double");
@@ -183,27 +174,11 @@ public class Tarantula extends CustomArmor{
         lore.add(ChatColor.GRAY + "Jump again mid-air to double");
         lore.add(ChatColor.GRAY + "jump!");
         lore.add(ChatColor.DARK_GRAY + "Mana Cost: " + ChatColor.DARK_AQUA + "40");
+        lore.add("");
         lore.add("" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "EPIC BOOTS");
 
-        HashMap<String, Integer> stats = new HashMap<>();
-        stats.put("mana", 50);
-        stats.put("health", 70);
-        stats.put("defence", 100);
-        stats.put("speed", 5);
 
-        createPiece(boots, ChatColor.DARK_PURPLE + "Tarantula Boots",lore, stats);
-
-    }
-
-    public void onDoubleJump(Player player){
-        if (manaCost <= plugin.getDPlayerManager().getDPlayer(player.getUniqueId().toString()).getStatistics().get(DPlayerStatType.REGEN_MANA).getValue()) {
-            Vector velocity = player.getLocation().getDirection().clone().multiply(0.4);
-            velocity.setY(0.55);
-            plugin.getDPlayerManager().getDPlayer(player.getUniqueId().toString()).getStatistics().get(DPlayerStatType.REGEN_MANA).remove(manaCost);
-            player.setVelocity(velocity);
-        } else {
-            player.sendMessage(ChatColor.RED + "Not enough mana");
-        }
+        CustomArmorPiece.createPiece(id, plugin, boots.piece, ChatColor.DARK_PURPLE + "Tarantula Boots",lore, boots.stats.getBase());
 
     }
 
